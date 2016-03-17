@@ -1,0 +1,28 @@
+{
+  "name": "restangular",
+  "version": "0.0.0",
+  "authors": [
+    "context"
+  ],
+  "description": "Test rest angular",
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.1",
+    "angular-animate": "~1.5.1",
+    "angular-route": "~1.5.1",
+    "jquery": "~2.2.2",
+    "animate.css": "~3.5.1",
+    "bootstrap": "~3.3.6",
+    "fontawesome": "~4.5.0",
+    "restangular": "~1.5.2",
+    "lodash": "~4.6.1"
+  }
+}

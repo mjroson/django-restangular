@@ -1,0 +1,25 @@
+<!-- CACHE FILE: detail.html -->
+<form name="myForm">
+  <div class="control-group" ng-class="{error: myForm.question.$invalid}">
+    <label>Name</label>
+    <input type="text" name="question" ng-model="object.question" required>
+    <span ng-show="myForm.question.$error.required" class="help-inline">
+        Required</span>
+  </div>
+  <div class="control-group">
+    <label>Description</label>
+  <textarea name="text_help" ng-model="object.text_help"></textarea>
+  </div>
+  
+  <div class="control-group">
+    <label for="pub_date">Pub date</label>
+    <input type="date" ng-model="object.pub_date" class="form-control">
+  </div>
+  
+  <br>
+  <a href="#/" class="btn">Cancel</a>
+  <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
+          class="btn btn-primary">Save</button>
+  <button ng-click="destroy()"
+          ng-show="object._id" class="btn btn-danger">Delete</button>
+</form>

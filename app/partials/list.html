@@ -1,0 +1,25 @@
+<!-- CACHE FILE: list.html -->
+<input type="text" ng-model="search" class="search-query" placeholder="Search">
+<style>
+  tr{
+    display: table-row !important;
+  }
+</style>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Question</th>
+    <th>Help text</th>
+    <th><a href="#/new"><i class="fa fa-plus"></i></a></th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="object in objects | filter:search | orderBy:'question'" >
+      <td><a href="#/edit/{{object.id}}" target="_blank">{{object.question}}</a></td>
+      <td>{{object.text_help}}</td>
+      <td>
+        <a href="#/edit/{{object.id}}"><i class="fa fa-pencil"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
