@@ -1,19 +1,21 @@
 <!-- CACHE FILE: detail.html -->
-<form name="myForm">
+<div class="col-md-8 col-md-offset-2">
+  <form sf-schema="schema" sf-form="form" sf-model="model"></form>
+  <form name="myForm">
   <div class="control-group" ng-class="{error: myForm.question.$invalid}">
-    <label>Name</label>
-    <input type="text" name="question" ng-model="object.question" required>
+    <label for="question">Question</label>
+    <input class="form-control" type="text" name="question" ng-model="object.question" required>
     <span ng-show="myForm.question.$error.required" class="help-inline">
         Required</span>
   </div>
   <div class="control-group">
-    <label>Description</label>
-  <textarea name="text_help" ng-model="object.text_help"></textarea>
+    <label for="text_help">Help Text</label>
+  <textarea class="form-control" name="text_help" ng-model="object.text_help"></textarea>
   </div>
   
   <div class="control-group">
     <label for="pub_date">Pub date</label>
-    <input type="date" ng-model="object.pub_date" class="form-control">
+    <input class="form-control" type="datetime" name="pub_date" ng-model="object.pub_date" class="form-control">
   </div>
   
   <br>
@@ -23,3 +25,8 @@
   <button ng-click="destroy()"
           ng-show="object._id" class="btn btn-danger">Delete</button>
 </form>
+
+
+
+
+</div>

@@ -1,0 +1,79 @@
+<form name="myForm" class="form-horizontal" role="form" ng-submit="submitForm()">
+ <div ng-repeat="field in entity.fields">    
+  <ng-form name="form">
+    <!-- TEXT FIELDS -->
+    <div ng-if="field.type=='text'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" id="{{field.name}}" data-ng-model="field.data"  class="form-control" required/>
+         <!--<span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>.-->
+         <span  data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+      </div>
+    </div>
+
+    <!-- EMAIL FIELDS -->
+    <div ng-if="field.type=='email'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" class="form-control" required/>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.email'}}">Not email!</span>
+      </div>
+    </div>
+
+    <!-- PASSWORD FIELDS -->
+    <div ng-if="field.type=='password'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" ng-minlength={{field.min}} ng-maxlength={{field.max}} class="form-control" required/>
+         <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+         <span data-ng-show=" {{'!form.'+field.name+'.required && (form.'+field.name+'.$error.minlength || form.'+field.name+'.$error.maxlength)' }}">Passwords must be between 8 and 20 characters.</span>
+        </div>
+    </div>
+
+    <!-- SELECT FIELDS -->
+    <div ng-if="field.type=='select'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+        <select data-ng-model="field.data" ng-options="option.name for option in field.options" class="form-control" required/>
+      </div>      
+    </div>
+
+    <!-- RADIO FIELDS -->
+    <div ng-if="field.type=='radio'" class="form-group">
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">
+           
+        <div class="checkbox" ng-repeat="option in field.options" >
+                  <label>                
+            <input type="radio" data-ng-model="field.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}">{{option.name}}
+          </label>
+                </div>
+      </div>
+    </div>
+
+    <!-- CHECKBOX FIELDS -->
+    <div ng-if="field.type=='checkbox'" class="form-group" >
+      <label class="col-sm-2 control-label">{{field.label}}</label>
+      <div class="col-sm-6">        
+               <div class="checkbox" ng-repeat="option in field.options" >
+                  <label>
+                    <input type="checkbox" data-ng-model="option.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}" >{{option.name}}
+                  </label>
+                </div>
+      
+      </div>
+    </div>
+
+  </ng-form>
+
+ </div>
+
+
+  <br/>
+  <button ng-disabled="myForm.$invalid" type="submit" id="submit">Submit</button>
+  <br/>
+  <pre>{{entity|json}}</pre>
+   <br/>
+       
+ </form>

@@ -1,7 +1,7 @@
 (function () {
 
 'use strict';
-  angular.module('GenericCrud', ['restangular', 'ngRoute', 'ngAnimate' ])
+  angular.module('GenericCrud', ['restangular', 'ngRoute', 'ngAnimate', 'schemaForm'])
 
   .config(function($routeProvider, RestangularProvider, $locationProvider, $httpProvider) {
     // CSRF Support
@@ -61,7 +61,7 @@ function CreateCtrl($scope, $location, Restangular) {
   }
 }
 
-function EditCtrl($scope, $location, Restangular, object) {
+function EditCtrl($scope, $location, Restangular, object, schemaForm) {
   var original = object;
   $scope.object = Restangular.copy(original);
   
@@ -81,6 +81,64 @@ function EditCtrl($scope, $location, Restangular, object) {
       $location.path('/');
     });
   };
+
+  $scope.schema = {
+    type: "object",
+    properties: {
+      "question": {
+                "type": "string",
+                "required": true,
+                "read_only": false,
+                "label": "Question",
+                "max_length": 100
+            },
+            "text_help": {
+                "type": "string",
+                "required": true,
+                "read_only": false,
+                "label": "Text help"
+            },
+            "pub_date": {
+                "type": "datetime",
+                "required": true,
+                "read_only": false,
+                "label": "Date published"
+            },
+            "status": {
+                "type": "choice",
+                "required": true,
+                "read_only": false,
+                "label": "Status",
+                "choices": [
+                    {
+                        "value": 0,
+                        "display_name": "Inactive"
+                    },
+                    {
+                        "value": 1,
+                        "display_name": "Active"
+                    }
+                ]
+            },
+            "is_draft": {
+                "type": "boolean",
+                "required": false,
+                "read_only": false,
+                "label": "Is draft",
+                "help_text": "This flag to marking if poll is ready to publishing"
+            }
+    }
+  };
+
+  $scope.form = [
+    "*",
+    {
+      type: "submit",
+      title: "Save"
+    }
+  ];
+
+  $scope.model = {};
 
 }
 })();
